@@ -20,7 +20,10 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png']
     if (!allowedTypes.includes(file.type)) {
+      const emptyFile = document.createElement('input');
+      emptyFile.type = 'file';
       const fileInput = this.document.querySelector(`input[data-testid="file"]`)
+      fileInput.files = emptyFile.files
       fileInput.value = ""
       return
     }
