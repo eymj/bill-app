@@ -85,9 +85,18 @@ const mockedBills = {
 }
 
 export default {
+  error: false,
   bills() {
+    if (this.error == "404") {
+      return { list() { return errorResponse("404") }}
+    }
+    if (this.error == "500") {
+      return { list() { return errorResponse("500") }}
+    }
     return mockedBills
-    //return {}
-  },
+  }
 }
 
+const errorResponse = (code) => {
+  return Promise.reject(new Error("Erreur " + code))
+}
